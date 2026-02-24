@@ -14,7 +14,7 @@ tempo = [
     "Ku ku kukuku... ahora!",
     "Em breve... si te gusta así...",
     "Cada vez que encontras uma mulher malportada...",
-    "Numa próxima viagem de caballo...",
+    "Na próxima viagem de caballo...",
     "Quando la Mami aparece..."
 ]
 
@@ -40,49 +40,71 @@ sujeitos = [
     "un grupo organizado de los papis y mamis"
 ]
 
-verbos = [
-    "despertará",
-    "confundirá",
-    "revelará",
-    "ocultará",
-    "transformará",
-    "dominará",
-    "incendiará",
-    "organizará",
-    "anunciará",
-    "marcará",
-    "iluminará",
-    "trairá",
-    "aprofundará",
-    "tocará",
-    "desafiará",
-    "seduzirá",
-    "esmagará",
-    "manipulará",
-    "provocará",
-    "intensificará",
-    "consumirá"
-]
+# -------- DESTINO CATEGORIES --------
 
-destinos = [
-    "teu império de samba",
-    "tu destino secreto",
+emotional_destinos = [
     "tua paz nos dias de chuva",
-    "teu poder de mover-se como uma gazela",
     "o calor dos teus lábios",
-    "a imagem da reina malportada",
-    "os efeitos de exercícios proibidos de cardio",
-    "o palco invisível da tua vida",
-    "tu reputação secreta",
     "o teu fogo interior",
-    "los olhos que te observan",
     "tua fragilidade escondida",
     "o teu equilíbrio emocional caliente",
-    "a tua noite mais perigosa",
     "tu confiança exagerada",
     "o ritmo do teu coração selvagem",
     "a energia que te rodeia"
 ]
+
+social_destinos = [
+    "teu império de samba",
+    "tu destino secreto",
+    "a imagem da reina malportada",
+    "o palco invisível da tua vida",
+    "tu reputação secreta",
+    "los olhos que te observan"
+]
+
+event_destinos = [
+    "teu poder de mover-se como uma gazela",
+    "os efeitos de exercícios proibidos de cardio",
+    "a tua noite mais perigosa"
+]
+
+all_destinos = emotional_destinos + social_destinos + event_destinos
+
+# -------- VERB CATEGORIES --------
+
+transformative_verbs = [
+    "transformará",
+    "intensificará",
+    "despertará",
+    "aprofundará",
+    "consumirá"
+]
+
+revelation_verbs = [
+    "revelará",
+    "iluminará",
+    "anunciará",
+    "marcará"
+]
+
+emotional_verbs = [
+    "incendiará",
+    "seduzirá",
+    "provocará",
+    "tocará",
+    "trairá"
+]
+
+power_verbs = [
+    "dominará",
+    "manipulará",
+    "confundirá",
+    "desafiará",
+    "esmagará",
+    "ocultará"
+]
+
+# -------- AVISOS --------
 
 avisos = [
     "Pero… cuídate. Hay más… pero no tan pronto.",
@@ -92,8 +114,14 @@ avisos = [
     "Lo que parece dulce puede quemar.",
     "Alguém está observando em silêncio.",
     "El poder siempre cobra precio.",
-    "Tu intensidade pode assustar até los fuertes."
+    "Tu intensidade pode assustar até los fuertes.",
+    "Hay pasos de samba prohibidos…",
+    "Pero tu sabes bien...",
+    "Y escucha bien…",
+    "Y lo que siempre se murmura en los bares sospechosos…"
 ]
+
+# -------- CONSELHOS --------
 
 conselhos = [
     "Não confies em conselhos de um sordo.",
@@ -101,15 +129,27 @@ conselhos = [
     "Agrade a primeira samba do próximo mês.",
     "Evite os pratos veganos e não picantes.",
     "Devolve 50% do teu salário ao Miko.",
-    "No pidas permiso."
+    "No pidas permiso.",
+    "Por enquanto, não confies nem na tua sombra."
 ]
 
 # -------------- LOGIC --------------
 
+def escolher_verbo(destino):
+    if destino in emotional_destinos:
+        return random.choice(transformative_verbs + emotional_verbs)
+    elif destino in social_destinos:
+        return random.choice(revelation_verbs + power_verbs)
+    elif destino in event_destinos:
+        return random.choice(transformative_verbs + emotional_verbs + power_verbs)
+
 def gerar_profecia() -> str:
+    destino = random.choice(all_destinos)
+    verbo = escolher_verbo(destino)
+
     return (
         f"{random.choice(tempo)}\n\n"
-        f"{random.choice(sujeitos)} {random.choice(verbos)} {random.choice(destinos)}.\n\n"
+        f"{random.choice(sujeitos)} {verbo} {destino}.\n\n"
         f"{random.choice(avisos)}\n\n"
         f"{random.choice(conselhos)}"
     )
