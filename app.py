@@ -33,7 +33,7 @@ sujeitos = [
     "una mirada de mil mujeres",
     "teu lado sin vergüenza",
     "un deseo de aprender secretos de salsa",
-    "um inesperado vício que no te deja dormir, papi",
+    "um inesperado vício que no te deja dormir",
     "una creencia numa deusa",
     "un amor que mata y no perdona",
     "tua fragilidade a los besos",
@@ -164,3 +164,4 @@ if st.button("Invocar 🔥"):
         st.code(gerar_profecia(), language="text")
     else:
         st.warning("A Nathy não foi invocada. Escreve: **Chama**")
+
